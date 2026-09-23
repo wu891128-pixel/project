@@ -73,12 +73,21 @@ function fitPagesToViewport(){
   const vv=window.visualViewport;
   const viewW=vv?.width || window.innerWidth;
   const viewH=vv?.height || window.innerHeight;
+
+  // 手機版改用「整個螢幕寬度 + 頁內可上下捲動」，
+  // 不再硬塞 A4 比例，避免文字被壓縮或裁掉。
+  if(viewW < 700){
+    document.documentElement.style.removeProperty('--page-w');
+    document.documentElement.style.removeProperty('--page-h');
+    return;
+  }
+
   const topbar=document.querySelector('.topbar')?.getBoundingClientRect().height || 0;
   const toolbar=document.querySelector('.toolbar')?.getBoundingClientRect().height || 0;
   const hint=document.querySelector('.hint')?.getBoundingClientRect().height || 0;
   const verticalGaps=46;
-  const maxH=Math.max(360,viewH-topbar-toolbar-hint-verticalGaps);
-  const maxW=Math.max(240,viewW*0.88);
+  const maxH=Math.max(420,viewH-topbar-toolbar-hint-verticalGaps);
+  const maxW=Math.max(300,viewW*0.88);
   const ratio=148/210;
   const pageW=Math.min(maxW,maxH*ratio,520);
   const pageH=pageW/ratio;
@@ -103,9 +112,10 @@ function updateControls(){
 function goTo(index){
   index=Math.max(0,Math.min(pages.length-1,index));
   current=index;
-  pages[index].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  const target=pages[index];
+  const left=target.offsetLeft-(book.clientWidth-target.offsetWidth)/2;
+  book.scrollTo({left:Math.max(0,left),behavior:'smooth'});
   updateControls();
-fitPagesToViewport();
 }
 
 prev.addEventListener('click',()=>goTo(current-1));
@@ -127,6 +137,7 @@ book.addEventListener('scroll',()=>{
   },80);
 },{passive:true});
 
+fitPagesToViewport();
 updateControls();
 
 window.addEventListener('resize',fitPagesToViewport);
