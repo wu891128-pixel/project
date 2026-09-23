@@ -14,16 +14,62 @@ const spots=[
 function page(html,extra=''){const el=document.createElement('div');el.className='page';el.innerHTML=`<section class="sheet ${extra}">${html}</section>`;return el}
 function spotPage(s,i){return page(`<div class="band">${s.band}</div><span class="stop">STOP ${String(i+1).padStart(2,'0')}</span><h2>${s.name}</h2><div class="en">${s.en}</div><div class="lead">✨ 一句話先懂｜${s.lead}</div><h3>30 秒故事</h3><p>${s.story}</p><div class="more"><h3>📖 再多知道一點</h3><p>${s.more}</p></div><h3>到了現場，記得看這些</h3><ul>${s.look.map(x=>`<li>${x}</li>`).join('')}</ul><div class="fact">💡 <b>有趣小知識</b>｜${s.fact}</div><div class="talk">🎙️ <b>可以這樣講給家人聽</b><br>${s.talk}</div>${s.reminder?`<div class="reminder">🧭 <b>現場小提醒</b>｜${s.reminder}</div>`:''}<div class="photo">📷 <b>旅拍 / 逛法提示</b>｜${s.photo}</div>`,`spot ${s.market?'market':''}`)}
 
-const book=document.getElementById('flipbook');
+const book=document.getElementById('book');
 book.appendChild(page(`<div class="star">✦</div><h2>曼谷旅途導覽小冊</h2><div class="year">BANGKOK • 2026</div>`,'cover'));
 book.appendChild(page(`<h2>先看懂這趟旅行的 4 種曼谷</h2><div class="box">👑 <b>① 王城曼谷</b>｜大皇宮・玉佛寺・臥佛寺<br>看的是泰國王權、佛教與拉達那哥欣舊城的核心。</div><div class="box">🌅 <b>② 河岸曼谷</b>｜Wat Pho Pier<br>看鄭王廟從白天變金色，再進入藍調時刻。</div><div class="box">🏮 <b>③ 華人老城</b>｜中國城・金佛寺・Song Wat・Talat Noi<br>從黃金佛像、老商號、倉庫到街頭藝術，像在讀曼谷移民史。</div><div class="box">🚤 <b>④ 水上市集與生活街區</b>｜丹嫩莎朵・美功・安帕瓦・Ari<br>從運河交易、火車市場到曼谷居民的咖啡與巷弄日常。</div><h3>🧩 最適合一起逛的組合</h3><p>中國城 → 金佛寺 → Song Wat → Talat Noi 很適合串成同一條「華人老城散步線」；大皇宮 → 臥佛寺 → Wat Pho Pier 則是經典「王城＋夕陽線」。</p>`,'summary'));
 spots.forEach((s,i)=>book.appendChild(spotPage(s,i)));
 book.appendChild(page(`<h2>旅途中最好用的 5 個導遊小技巧</h2><ol><li>先講「一句話版本」，家人有興趣再補歷史，不要一開始就塞年代。</li><li>寺廟介紹重點放在「為什麼重要」；街區介紹重點放在「以前做什麼、現在變成什麼」。</li><li>市場先看運作方式，再買東西：火車怎麼穿過、船怎麼交易，比單純購物更值得記。</li><li>同一區不要只追打卡點。Song Wat、Talat Noi、Ari 都適合故意繞進巷子。</li><li>夕陽景點至少留到日落後 15–20 分鐘，藍調時刻常比落日瞬間更好拍。</li></ol><blockquote>從皇城的金色，到中國城的紅色，再到河岸的夕陽與巷弄的生活感——你會看到曼谷不是一種樣子，而是很多時代同時活在一座城市裡。</blockquote><div class="sources"><h3>主要資料來源（更新查核：2026/09/23）</h3><p>Grand Palace 官方：royalgrandpalace.th<br>Wat Pho 官方：watpho.com<br>Tourism Authority of Thailand：tourismthailand.org<br>Thai Airways ROYAL ORCHID PLUS Newsletter 2026：Song Wat Road<br>TAGTHAi 2026：Talat Noi<br>Time Out Bangkok 2026：Ari<br>Wat Arun / Tha Tien 河岸資料：Wat Pho 官方交通資訊與 2026 河岸夕陽指南交叉確認</p></div>`,'tips'));
 
-const pf=new St.PageFlip(book,{width:707,height:1000,size:'stretch',minWidth:260,maxWidth:707,minHeight:368,maxHeight:1000,maxShadowOpacity:.28,showCover:false,mobileScrollSupport:false,useMouseEvents:true,swipeDistance:20,flippingTime:650,drawShadow:true,autoSize:true});
-pf.loadFromHTML(document.querySelectorAll('#flipbook .page'));
-const now=document.getElementById('pageNow'),total=document.getElementById('pageTotal');
-total.textContent=pf.getPageCount();now.textContent='1';
-pf.on('flip',e=>{now.textContent=String(e.data+1)});
-document.getElementById('prevPage').addEventListener('click',()=>pf.flipPrev());
-document.getElementById('nextPage').addEventListener('click',()=>pf.flipNext());
+const pages=[...book.querySelectorAll('.page')];
+const now=document.getElementById('pageNow');
+const total=document.getElementById('pageTotal');
+const prev=document.getElementById('prevPage');
+const next=document.getElementById('nextPage');
+const viewport=document.getElementById('bookViewport');
+let current=0,touchStartX=0,touchStartY=0,animating=false;
+total.textContent=String(pages.length);
+
+function fitBook(){
+  const toolbar=document.querySelector('.toolbar');
+  const hint=document.querySelector('.hint');
+  const topbar=document.querySelector('.topbar');
+  const vw=window.innerWidth;
+  const vh=window.innerHeight;
+  const ratio=210/297;
+  const sideGap=vw<600?18:36;
+  const chrome=(topbar?.offsetHeight||0)+(toolbar?.offsetHeight||0)+(hint?.offsetHeight||0)+34;
+  const maxW=Math.max(220,vw-sideGap);
+  const maxH=Math.max(320,vh-chrome);
+  const w=Math.min(maxW,maxH*ratio,707);
+  document.documentElement.style.setProperty('--book-w',Math.floor(w)+'px');
+  document.documentElement.style.setProperty('--book-h',Math.floor(w/ratio)+'px');
+}
+function render(direction=0){
+  pages.forEach((p,i)=>{
+    p.classList.remove('active','before','after','turn-next','turn-prev');
+    if(i===current)p.classList.add('active');
+    else if(i<current)p.classList.add('before');
+    else p.classList.add('after');
+  });
+  now.textContent=String(current+1);
+  prev.disabled=current===0;
+  next.disabled=current===pages.length-1;
+}
+function go(to,dir){
+  if(animating||to<0||to>=pages.length||to===current)return;
+  animating=true;
+  const old=pages[current],incoming=pages[to];
+  incoming.classList.remove('before','after');
+  incoming.classList.add('active');
+  incoming.style.opacity='1';
+  old.classList.add(dir>0?'turn-next':'turn-prev');
+  setTimeout(()=>{current=to;incoming.style.opacity='';render();animating=false},470);
+}
+prev.addEventListener('click',()=>go(current-1,-1));
+next.addEventListener('click',()=>go(current+1,1));
+viewport.addEventListener('touchstart',e=>{const t=e.changedTouches[0];touchStartX=t.clientX;touchStartY=t.clientY},{passive:true});
+viewport.addEventListener('touchend',e=>{const t=e.changedTouches[0],dx=t.clientX-touchStartX,dy=t.clientY-touchStartY;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.2)go(current+(dx<0?1:-1),dx<0?1:-1)},{passive:true});
+window.addEventListener('resize',fitBook);
+window.addEventListener('orientationchange',()=>setTimeout(fitBook,120));
+fitBook();
+render();
