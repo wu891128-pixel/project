@@ -68,6 +68,24 @@ book.appendChild(page(`<h2>旅途中最好用的 5 個導遊小技巧</h2>
   <blockquote>從皇城的金色，到中國城的紅色，再到河岸的夕陽與巷弄的生活感——曼谷不是一種樣子，而是很多時代同時活在一座城市裡。</blockquote>
   <div class="sources"><h3>主要資料來源</h3><p>Grand Palace 官方、Wat Pho 官方、Tourism Authority of Thailand、Thai Airways ROYAL ORCHID PLUS Newsletter、TAGTHAi、Time Out Bangkok。</p></div>`,'tips'));
 
+
+function fitPagesToViewport(){
+  const vv=window.visualViewport;
+  const viewW=vv?.width || window.innerWidth;
+  const viewH=vv?.height || window.innerHeight;
+  const topbar=document.querySelector('.topbar')?.getBoundingClientRect().height || 0;
+  const toolbar=document.querySelector('.toolbar')?.getBoundingClientRect().height || 0;
+  const hint=document.querySelector('.hint')?.getBoundingClientRect().height || 0;
+  const verticalGaps=46;
+  const maxH=Math.max(360,viewH-topbar-toolbar-hint-verticalGaps);
+  const maxW=Math.max(240,viewW*0.88);
+  const ratio=148/210;
+  const pageW=Math.min(maxW,maxH*ratio,520);
+  const pageH=pageW/ratio;
+  document.documentElement.style.setProperty('--page-w',Math.floor(pageW)+'px');
+  document.documentElement.style.setProperty('--page-h',Math.floor(pageH)+'px');
+}
+
 const pages=[...book.querySelectorAll('.page')];
 const now=document.getElementById('pageNow');
 const total=document.getElementById('pageTotal');
@@ -87,6 +105,7 @@ function goTo(index){
   current=index;
   pages[index].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
   updateControls();
+fitPagesToViewport();
 }
 
 prev.addEventListener('click',()=>goTo(current-1));
@@ -109,3 +128,10 @@ book.addEventListener('scroll',()=>{
 },{passive:true});
 
 updateControls();
+
+window.addEventListener('resize',fitPagesToViewport);
+window.addEventListener('orientationchange',()=>setTimeout(fitPagesToViewport,120));
+if(window.visualViewport){
+  window.visualViewport.addEventListener('resize',fitPagesToViewport);
+  window.visualViewport.addEventListener('scroll',fitPagesToViewport);
+}
