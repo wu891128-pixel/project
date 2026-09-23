@@ -1,83 +1,36 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0f5b56" />
-  <meta name="description" content="我們這一家・曼谷大冒險 2026｜行程、景點故事與翻頁旅遊書" />
-  <title>我們這一家・曼谷大冒險 2026</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f1e7">
+  <title>曼谷旅途導覽小冊</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header" id="top">
-    <a class="brand" href="#top" aria-label="回首頁"><span class="brand-mark">✦</span><span><strong>我們這一家</strong><small>BANGKOK 2026</small></span></a>
-    <button class="nav-toggle" aria-label="開啟選單" aria-expanded="false">☰</button>
-    <nav class="nav" aria-label="主要導覽">
-      <a href="#overview">旅行首頁</a><a href="#itinerary">每日行程</a><a href="#guidebook">翻頁導覽書</a><a href="#essentials">旅行資訊</a>
-      <a class="nav-pill" href="https://mia-bangkok-trip-2026.h9t2jssn5w.chatgpt.site/" target="_blank" rel="noreferrer">原共編行程 ↗</a>
-    </nav>
+  <header class="topbar">
+    <span class="mark">✦</span>
+    <h1>曼谷旅途導覽小冊</h1>
   </header>
-  <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-glow hero-glow-a"></div><div class="hero-glow hero-glow-b"></div>
-      <div class="hero-content">
-        <p class="kicker">FAMILY TRIP · 23–28 SEP 2026</p>
-        <h1 id="hero-title">曼谷不只一種樣子，<br><em>這次我們慢慢翻著看。</em></h1>
-        <p class="hero-copy">把每日行程、景點故事、河岸夕陽、老城巷弄與市場日常，整理成一本可以一路帶著走的線上旅遊書。</p>
-        <div class="hero-actions"><a class="btn primary" href="#itinerary">開始看行程</a><a class="btn ghost" href="#guidebook">打開翻頁導覽書</a></div>
-        <div class="trip-meta"><span>✈️ BR205 / BR206</span><span>🏨 Centre Point Hotel Sukhumvit 10</span><span>👨‍👩‍👧‍👧 4 人家庭旅行</span></div>
-      </div>
-      <aside class="hero-card" aria-label="旅程摘要">
-        <div class="hero-card-top"><span class="mini-label">TODAY'S BOOKMARK</span><span class="status-dot"></span></div>
-        <div class="date-lockup"><span class="date-big">23</span><span class="date-side">SEP<br>2026</span></div>
-        <p id="trip-status">準備出發，曼谷見。</p><div class="route-line"><span>TPE</span><i></i><b>✈</b><i></i><span>BKK</span></div>
-      </aside>
-    </section>
-    <section class="section intro" id="overview">
-      <div class="section-heading"><span class="eyebrow">01 · TRIP MOOD</span><h2>先看懂這趟旅行的 4 種曼谷</h2><p>同一座城市裡，王城、河岸、華人老城與生活街區同時存在。這也是這趟旅行最值得看的地方。</p></div>
-      <div class="story-grid">
-        <article class="story-card royal"><span class="story-no">01</span><div class="story-icon">👑</div><h3>王城曼谷</h3><p>大皇宮・玉佛寺・臥佛寺</p><small>看王權、佛教與拉達那哥欣舊城的核心。</small></article>
-        <article class="story-card riverside"><span class="story-no">02</span><div class="story-icon">🌅</div><h3>河岸曼谷</h3><p>Wat Pho Pier</p><small>看鄭王廟從白天、金色夕陽走進藍調時刻。</small></article>
-        <article class="story-card chinatown"><span class="story-no">03</span><div class="story-icon">🏮</div><h3>華人老城</h3><p>中國城・金佛寺・Song Wat・Talat Noi</p><small>像在散步讀一段曼谷的移民史與商業史。</small></article>
-        <article class="story-card local"><span class="story-no">04</span><div class="story-icon">🚤</div><h3>市場與生活街區</h3><p>丹嫩莎朵・美功・安帕瓦・Ari</p><small>從運河交易、火車市場一路走進當代週末生活。</small></article>
-      </div>
-    </section>
-    <section class="section itinerary-section" id="itinerary">
-      <div class="section-heading compact"><span class="eyebrow">02 · ITINERARY</span><h2>6 天 5 夜，照著這本走</h2><p>保留原本行程網站的「每天一頁」感，但改成更適合旅途中手機快速查看的時間線。</p></div>
-      <div class="day-tabs" role="tablist" aria-label="每日行程">
-        <button class="day-tab active" data-day="d923"><strong>9/23</strong><small>抵達</small></button><button class="day-tab" data-day="d924"><strong>9/24</strong><small>華人老城</small></button><button class="day-tab" data-day="d925"><strong>9/25</strong><small>王城河岸</small></button><button class="day-tab" data-day="d926"><strong>9/26</strong><small>包車市場</small></button><button class="day-tab" data-day="d927"><strong>9/27</strong><small>Ari・採買</small></button><button class="day-tab" data-day="d928"><strong>9/28</strong><small>返台</small></button>
-      </div>
-      <div class="day-panels">
-        <article class="day-panel active" id="d923"><div class="day-cover"><span>DAY 1</span><h3>台北 → 曼谷</h3><p>把第一晚留給抵達與休息。</p></div><div class="timeline"><div class="event"><time>18:00</time><div><h4>抵達桃園機場 T2</h4><p>預留報到、托運與出境時間。</p></div></div><div class="event highlight"><time>20:45</time><div><h4>長榮 BR205 起飛</h4><p>桃園 → 曼谷蘇凡納布。</p></div></div><div class="event"><time>23:30</time><div><h4>抵達 BKK</h4><p>入境後前往 Centre Point Hotel Sukhumvit 10。</p></div></div></div></article>
-        <article class="day-panel" id="d924"><div class="day-cover"><span>DAY 2</span><h3>華人老城 × 河岸</h3><p>第一次正式走進曼谷的歷史層次。</p></div><div class="timeline"><div class="event"><time>09:00</time><div><h4>飯店早餐・慢慢起床</h4><p>前一晚較晚抵達，上午保留舒服節奏。</p></div></div><div class="event highlight"><time>11:30</time><div><h4>金佛寺 Wat Traimit</h4><p>從「藏在灰泥裡的黃金佛」開始今天的華人老城線。</p></div></div><div class="event"><time>12:00+</time><div><h4>JAM JAM Chinatown・中國城散步</h4><p>午餐後看耀華力的老商圈、金行招牌與巷弄生活。</p></div></div><div class="event"><time>午後</time><div><h4>ICONSIAM</h4><p>轉往河岸百貨，休息、逛街、看昭披耶河景。</p></div></div><div class="event"><time>晚間</time><div><h4>按摩・回飯店</h4><p>以飯店附近乾淨舒適的按摩收尾。</p></div></div></div></article>
-        <article class="day-panel" id="d925"><div class="day-cover"><span>DAY 3</span><h3>王城 × 臥佛 × 夕陽</h3><p>曼谷最經典的一天，留到夕陽之後再走。</p></div><div class="timeline"><div class="event highlight"><time>上午</time><div><h4>大皇宮＋玉佛寺</h4><p>看曼谷建都後王權、國家儀式與信仰的核心。</p></div></div><div class="event"><time>午後</time><div><h4>臥佛寺 Wat Pho</h4><p>除了巨大臥佛，也找找寺內留下的傳統醫學與按摩知識。</p></div></div><div class="event highlight"><time>傍晚</time><div><h4>Wat Pho Pier / Tha Tien 看夕陽</h4><p>從河東岸看鄭王廟變成金色剪影，再等一段藍調時間。</p></div></div><div class="event"><time>晚餐</time><div><h4>河岸景觀餐廳</h4><p>以鄭王廟夜景作為王城日的最後一幕。</p></div></div></div></article>
-        <article class="day-panel" id="d926"><div class="day-cover"><span>DAY 4</span><h3>包車市場日</h3><p>從運河到鐵道，再看傍晚河岸生活。</p></div><div class="timeline"><div class="event highlight"><time>早上</time><div><h4>丹嫩莎朵水上市場</h4><p>搭長尾船看「運河就是道路」的經典水上市場畫面。</p></div></div><div class="event"><time>中午前後</time><div><h4>美功鐵道市場</h4><p>重點是完整看一次「收傘 → 火車通過 → 市場復原」。</p></div></div><div class="event highlight"><time>午後</time><div><h4>安帕瓦水上市場</h4><p>把焦點放在河岸店屋、吃東西與傍晚燈光，而不是重複丹嫩莎朵。</p></div></div></div></article>
-        <article class="day-panel" id="d927"><div class="day-cover"><span>DAY 5</span><h3>Ari 巷弄 × 最後採買</h3><p>最後一天不要只待在百貨，先看一點當代曼谷。</p></div><div class="timeline"><div class="event highlight"><time>上午</time><div><h4>Ari Area</h4><p>沒有必看地標；挑順眼的巷子拐進去，看住宅、咖啡、老店與新店混在一起。</p></div></div><div class="event"><time>午後</time><div><h4>CentralWorld・Big C</h4><p>集中採買伴手禮與最後補貨。</p></div></div><div class="event"><time>晚間</time><div><h4>最後一次按摩</h4><p>整理行李與身體狀態，再前往機場。</p></div></div><div class="event highlight"><time>22:30</time><div><h4>抵達蘇凡納布機場</h4><p>搭地鐵前往，保留充足報到時間。</p></div></div></div></article>
-        <article class="day-panel" id="d928"><div class="day-cover"><span>DAY 6</span><h3>曼谷 → 台北</h3><p>凌晨班機，回家補眠。</p></div><div class="timeline"><div class="event highlight"><time>01:35</time><div><h4>長榮 BR206 起飛</h4><p>曼谷蘇凡納布 → 桃園 T2。</p></div></div><div class="event"><time>06:20</time><div><h4>抵達桃園</h4><p>旅程結束，把照片、影片和這本旅遊書一起留下來。</p></div></div></div></article>
-      </div>
-    </section>
-    <section class="section guidebook-section" id="guidebook">
-      <div class="section-heading light compact"><span class="eyebrow">03 · POCKET GUIDE</span><h2>把 PDF 原稿變成可以真的「翻」的旅遊書</h2><p>已把你上傳的 14 頁導覽 PDF 內容轉製成網站翻頁版：手機左右滑、桌機拖曳頁角，也更適合小螢幕閱讀。</p></div>
-      <div class="guide-shell">
-        <div class="guide-toolbar"><button id="prevPage" class="book-btn">← 上一頁</button><div class="page-status"><span id="pageNow">1</span><i>/</i><span id="pageTotal">14</span></div><button id="nextPage" class="book-btn">下一頁 →</button></div>
-        <div class="book-stage"><div id="loadingBook" class="book-loading"><span class="loader"></span><strong>正在把導覽書裝訂成翻頁版…</strong></div><div id="flipbook" class="flipbook" aria-label="曼谷旅途翻頁導覽書"></div></div>
-        <div class="book-links"><span class="btn light-btn static">PDF 原稿內容已完整轉製為線上版</span><span class="text-link">共 14 頁 · 11 個景點</span></div>
-      </div>
-      <div class="spot-index" aria-label="景點導覽索引"><button data-page="2">01 大皇宮＋玉佛寺</button><button data-page="3">02 臥佛寺</button><button data-page="4">03 Wat Pho Pier</button><button data-page="5">04 中國城</button><button data-page="6">05 金佛寺</button><button data-page="7">06 Song Wat Road</button><button data-page="8">07 Talat Noi</button><button data-page="9">08 丹嫩莎朵</button><button data-page="10">09 美功鐵道市場</button><button data-page="11">10 安帕瓦</button><button data-page="12">11 Ari Area</button></div>
-    </section>
-    <section class="section essentials" id="essentials">
-      <div class="section-heading compact"><span class="eyebrow">04 · ESSENTIALS</span><h2>出發時最常會找的資訊</h2></div>
-      <div class="essentials-grid">
-        <article class="info-card"><span>✈️</span><h3>航班</h3><p><strong>去程 BR205</strong><br>9/23 20:45 → 23:30<br>桃園 T2 → BKK</p><p><strong>回程 BR206</strong><br>9/28 01:35 → 06:20<br>BKK → 桃園 T2</p></article>
-        <article class="info-card"><span>🏨</span><h3>住宿</h3><p><strong>Centre Point Hotel Sukhumvit 10</strong></p><p>素坤逸／Asok 區，旅途中作為市中心交通據點。</p></article>
-        <article class="info-card"><span>🛂</span><h3>入境</h3><p>出發前再次確認泰國數位入境資料與護照、航班、住宿資訊。</p><a href="https://tdac.immigration.go.th/arrival-card/#/home" target="_blank" rel="noreferrer">TDAC 官方網站 ↗</a></article>
-        <article class="info-card accent-card"><span>📖</span><h3>原行程網站</h3><p>需要看更完整的紀錄、共編資料或原本整理內容時，可以回到舊版。</p><a href="https://mia-bangkok-trip-2026.h9t2jssn5w.chatgpt.site/" target="_blank" rel="noreferrer">開啟原共編行程 ↗</a></article>
-      </div>
-    </section>
+
+  <main class="reader">
+    <div class="toolbar" aria-label="翻頁控制">
+      <button id="prevPage" class="nav-btn">← 上一頁</button>
+      <div class="counter"><span id="pageNow">1</span><i>/</i><span id="pageTotal">14</span></div>
+      <button id="nextPage" class="nav-btn">下一頁 →</button>
+    </div>
+
+    <div class="book-wrap">
+      <div id="flipbook" class="flipbook" aria-label="曼谷旅途翻頁導覽書"></div>
+    </div>
+
+    <div class="hint">左右滑動或拖曳頁角翻頁</div>
   </main>
-  <footer><div><strong>我們這一家・曼谷大冒險 2026</strong><p>From golden temples to hidden sois.</p></div><a href="#top">回到最上面 ↑</a></footer>
-  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script><script src="app.js"></script>
-</body></html>
+
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
